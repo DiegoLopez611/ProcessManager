@@ -16,8 +16,8 @@ return new class extends Migration
             $table->text('identificacion');
             $table->text('descripcion');
             $table->Integer('tiempoDuracion');
-            $table->boolean('obligatorio');
-            $table->Integer('nivelPrioridad');
+            $table->boolean('obligatoria');
+            $table->Integer('NivelPrioridad');
             $table->timestamps();
         });
     }

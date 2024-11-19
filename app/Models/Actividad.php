@@ -10,7 +10,7 @@ use App\Models\Tarea;
 class Actividad extends Model
 {
     protected $table = 'actividades';
-    protected $fillable = ['nombre', 'descripcion', 'obligatoria'];
+    protected $fillable = ['nombre', 'descripcion', 'obligatoria', 'siguiente'];
 
     public function proceso()
     {

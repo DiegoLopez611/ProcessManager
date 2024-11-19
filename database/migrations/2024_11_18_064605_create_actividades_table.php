@@ -16,7 +16,8 @@ return new class extends Migration
             $table->text('nombre');
             $table->text('descripcion');
             $table->boolean('obligatorio');
-            $table->foreignId('proceso_id')->constrained();
+            $table->Integer('siguiente');
+            $table->foreignId('proceso_id')->constrained('procesos');
             $table->timestamps();
         });
     }

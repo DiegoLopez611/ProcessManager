@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notificaciones', function (Blueprint $table) {
+        Schema::create('nodo_listas_actividades', function (Blueprint $table) {
             $table->id();
-            $table->text('mensaje');
-            $table->date('fecha');
-            $table->foreignId('empleado_id')->constrained();
-            $table->foreignId('tareas_id')->constrained();
+            $table->Integer('proceso_id');
+            $table->Integer('actividad_id');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notificaciones');
+        Schema::dropIfExists('nodo_listas_actividades');
     }
 };
