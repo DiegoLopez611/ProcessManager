@@ -10,7 +10,7 @@ use App\Models\Tarea;
 class Actividad extends Model
 {
     protected $table = 'actividades';
-    protected $fillable = ['nombre', 'descripcion', 'obligatoria', 'siguiente'];
+    protected $fillable = ['nombre', 'descripcion', 'obligatorio', 'proceso_id'];
 
     public function proceso()
     {
@@ -21,4 +21,8 @@ class Actividad extends Model
     {
         return $this->belongsToMany(Tarea::class);
     }
+
+    protected $casts = [
+        'obligatorio' => 'boolean',
+    ];
 }

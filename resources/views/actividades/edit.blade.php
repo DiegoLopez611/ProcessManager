@@ -33,38 +33,11 @@
                     </div>
 
                     <!-- Formulario -->
-                    <form action="{{ route('actividades.store', $proceso->id) }}" method="POST" class="space-y-6">
+                    <form action="{{ route('actividades.update' , $actividad->id ) }}" method="POST" class="space-y-6">
                         @csrf
+                        @method('PUT')
 
-                        <!-- Campo de Posicionamiento de Actividad -->
-                        <div>
-                            <x-label for="posicionamiento" value="Posicionamiento de la Actividad" />
-                            <div class="mt-2">
-                                <select 
-                                    id="posicionamiento" 
-                                    name="posicionamiento" 
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                >
-                                    <option value="final">Agregar al Final</option>
-                                    <option value="ultimo">Agregar después del Último Agregado</option>
-                                    <option value="despues">Agregar después de</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Campo Despues De (Inicialmente Oculto) -->
-                        <div id="despues-de-container" style="display: none;">
-                            <x-label for="despues_de" value="Nombre de la Actividad Anterior" />
-                            <select 
-                                id="despues_de" 
-                                name="despues_de" 
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                            >
-                                @foreach($actividades as $actividad)
-                                    <option value="{{ $actividad->id }}">{{ $actividad->nombre }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    
 
                         <!-- Campo de Nombre -->
                         <div>
@@ -74,7 +47,7 @@
                                 name="nombre" 
                                 type="text" 
                                 class="mt-1 block w-full" 
-                                value="{{ old('nombre') }}" 
+                                value="{{ old('nombre' , $actividad->nombre) }}" 
                                 required 
                             />
                             @error('nombre')
@@ -91,7 +64,7 @@
                                 rows="3" 
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                 placeholder="Ingrese la descripción de la actividad"
-                            >{{ old('descripcion') }}</textarea>
+                            >{{ old('nombre' , $actividad->nombre) }}</textarea>
                             @error('descripcion')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -111,7 +84,7 @@
                                 >
                                 <x-label for="obligatorio" value="¿Es una actividad obligatoria?" class="ml-2" />
                             </div>
-                            @error('obligatorio')
+                            @error(old('obligatorio' , $actividad->obligatorio))
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
@@ -125,7 +98,7 @@
                                 Cancelar
                             </a>
                             <x-button type="submit" class="bg-indigo-600 hover:bg-indigo-700">
-                                Crear Actividad
+                                Editar Actividad
                             </x-button>
                         </div>
                     </form>

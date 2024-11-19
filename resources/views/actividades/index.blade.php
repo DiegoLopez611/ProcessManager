@@ -25,6 +25,21 @@
                 <h3 class="text-lg font-semibold text-gray-800">
                     Actividades del Proceso
                 </h3>
+                <form action="{{ route('actividades.buscar', $proceso->id) }}" method="GET" class="flex items-center">
+                    <input 
+                        type="text" 
+                        name="buscar" 
+                        placeholder="Buscar actividad" 
+                        value="{{ request('buscar') }}"
+                        class="mr-2 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                    <button 
+                        type="submit" 
+                        class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                    >
+                        Buscar
+                    </button>
+                </form>
                 <a href="{{ route('actividades.create', $proceso) }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -43,7 +58,7 @@
                                     {{ $actividad->nombre }}
                                 </h4>
                                 <span class="px-3 py-1 text-xs font-medium rounded-full {{ $actividad->es_obligatoria ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800' }}">
-                                    {{ $actividad->obligatoria ? 'Obligatoria' : 'Opcional' }}
+                                    {{ $actividad->obligatorio ? 'Obligatoria' : 'Opcional' }}
                                 </span>
                             </div>
                             
@@ -60,10 +75,10 @@
                                 </div>
 
                             <div class="mt-4 flex justify-end space-x-2">
-                                <a href="{{ route('procesos.actividades.show', [$proceso, $actividad]) }}" class="inline-flex items-center px-3 py-1 bg-gray-100 border border-transparent rounded-md font-medium text-xs text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition ease-in-out duration-150">
-                                    Ver detalles
+                                <a href="{{ route('tareas.index', $actividad->id) }}" class="inline-flex items-center px-3 py-1 bg-gray-100 border border-transparent rounded-md font-medium text-xs text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition ease-in-out duration-150">
+                                    Gestionar Tareas
                                 </a>
-                                <a href="{{ route('procesos.actividades.edit', [$proceso, $actividad]) }}" class="inline-flex items-center px-3 py-1 bg-blue-100 border border-transparent rounded-md font-medium text-xs text-blue-700 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition ease-in-out duration-150">
+                                <a href="{{ route('actividades.edit', $actividad->id) }}" class="inline-flex items-center px-3 py-1 bg-blue-100 border border-transparent rounded-md font-medium text-xs text-blue-700 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition ease-in-out duration-150">
                                     Editar
                                 </a>
                             </div>

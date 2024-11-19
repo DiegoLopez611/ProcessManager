@@ -1,8 +1,10 @@
 <?php
 
 namespace App\EstructurasDeDatos\ListaEnlazada;
+use Iterator;
+use App\EstructurasDeDatos\ListaEnlazada\Node;
 
-class LinkedList implements Iterator{
+class ListaEnlazada implements Iterator{
     private $head;    
     private $size;
     private $current;  
@@ -80,6 +82,61 @@ class LinkedList implements Iterator{
             $current->next = $current->next->next;
             $this->size--; // Reducir el tamaño de la lista
         }
+    }
+
+    public function getLast() {
+        if ($this->isEmpty()) {
+            return null;
+        }
+    
+        $current = $this->head;
+        while ($current->next !== null) {
+            $current = $current->next;
+        }
+    
+        return $current->data;
+    }
+
+    public function insertAfter($targetData, $newData) {
+        if ($this->isEmpty()) {
+            echo "La lista está vacía. No se puede insertar después de un nodo.\n";
+            return;
+        }
+    
+        $current = $this->head;
+    
+        // Buscar el nodo objetivo
+        while ($current !== null && $current->data->nombre !== $targetData->nombre) {
+            $current = $current->next;
+        }
+    
+        if ($current === null) {
+            echo "El nodo con el valor {$targetData} no se encontró en la lista.\n";
+            return;
+        }
+    
+        // Crear un nuevo nodo
+        $newNode = new Node($newData);
+    
+        // Insertar el nuevo nodo después del nodo objetivo
+        $newNode->next = $current->next;
+        $current->next = $newNode;
+    
+        // Incrementar el tamaño de la lista
+        $this->size++;
+    }
+
+    public function popFirst() {
+        if ($this->isEmpty()) {
+            echo "La lista está vacía. No se puede obtener y eliminar el primer elemento.\n";
+            return null; // Si la lista está vacía, retornamos null
+        }
+    
+        $data = $this->head->data; // Guardar el dato del primer nodo
+        $this->head = $this->head->next; // Mover la cabeza al siguiente nodo
+        $this->size--; // Reducir el tamaño de la lista
+    
+        return $data; // Retornar el dato del nodo eliminado
     }
 
     public function rewind() {

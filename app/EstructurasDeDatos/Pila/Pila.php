@@ -2,7 +2,9 @@
 
 namespace App\EstructurasDeDatos\Pila;
 
-class Stack {
+use App\EstructurasDeDatos\Pila\Node;
+
+class Pila {
     private $top;
     private $size;
 

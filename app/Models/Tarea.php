@@ -10,7 +10,7 @@ use App\Models\Notificacion;
 class Tarea extends Model
 {
     protected $table = 'tareas';
-    protected $fillable = ['identificacion', 'descripcion', 'tiempoDuracion', 'obligatoria', 'nivelPrioridad'];
+    protected $fillable = ['identificacion', 'descripcion', 'tiempoDuracion', 'obligatoria', 'nivelPrioridad', 'actividad_id'];
 
     public function notificacion()
     {

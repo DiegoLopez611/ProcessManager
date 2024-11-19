@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Proceso;
+use App\Models\Actividad;
 
 class ProcesoController extends Controller
 {
@@ -14,6 +15,19 @@ class ProcesoController extends Controller
     public function index()
     {
         $procesos = Proceso::all();
+        foreach ($procesos as $proceso) {
+            $duracion; 
+            $actividades = Actividad::where('proceso_id', $proceso->id)->get();
+            
+            foreach($actividades as $actividad){
+                $tareas = Tarea::where('actividad_id', $actividad->id)->get();
+
+                foreach($tareas as $tarea){
+                    $duracion+= $tarea->tiempoDuracion;
+                }
+
+            }
+        }
         return view('procesos.index', compact('procesos'));
     }
 
