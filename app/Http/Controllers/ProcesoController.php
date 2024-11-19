@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Proceso;
 use App\Models\Actividad;
+use App\Models\Tarea;
 
 class ProcesoController extends Controller
 {
@@ -15,8 +16,9 @@ class ProcesoController extends Controller
     public function index()
     {
         $procesos = Proceso::all();
+        
         foreach ($procesos as $proceso) {
-            $duracion; 
+            $duracion = 0; 
             $actividades = Actividad::where('proceso_id', $proceso->id)->get();
             
             foreach($actividades as $actividad){
@@ -27,7 +29,9 @@ class ProcesoController extends Controller
                 }
 
             }
+            $proceso->duracion = $duracion;
         }
+
         return view('procesos.index', compact('procesos'));
     }
 
